@@ -45,6 +45,8 @@ dependencies:
   flutter_native_splash: ^2.4.0
   share_plus:
   from_css_color:
+  google_sign_in:
+  firebase_auth:
 dev_dependencies:
   flutter_test:
     sdk: flutter

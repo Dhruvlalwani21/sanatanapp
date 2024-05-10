@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:sanatan_dharmaya/pages/categories/category.dart';
-
+import 'package:from_css_color/from_css_color.dart';
 import '../../components/Appbar.component.dart';
 
 class Categories extends StatefulWidget {
@@ -32,8 +32,12 @@ class _CategoriesState extends State<Categories> {
         categories = List<Map<String, dynamic>>.from(
             json.decode(categoriesResponse.body).map((item) {
           return {
+            'id': item['_id'] as String,
             'name': item['Name'] as String,
             'icon': item['Icon'] as String,
+            'Colorleft': item['Colorleft'] as String,
+            'Colorright': item['Colorright'] as String,
+            'Headfontcolor': item['Headfontcolor'] as String,
             'count': item['pagesCount'] as int,
           };
         }));
@@ -91,6 +95,7 @@ class CategorySection extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => Pages(
                                 categorytitle: category['name']!,
+                                categoryid: category['id']!,
                               )),
                     );
                   },
@@ -105,8 +110,8 @@ class CategorySection extends StatelessWidget {
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,
                             colors: [
-                              const Color.fromARGB(255, 255, 99, 88),
-                              const Color.fromARGB(255, 255, 157, 157)
+                              fromCssColor(category['Colorleft']!),
+                              fromCssColor(category['Colorright']!),
                             ])),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -120,7 +125,8 @@ class CategorySection extends StatelessWidget {
                               Text(
                                 category['name']!,
                                 style: TextStyle(
-                                    color: Colors.white,
+                                    color: fromCssColor(
+                                        category['Headfontcolor']!),
                                     fontWeight: FontWeight.w600,
                                     fontSize: 16),
                               ),

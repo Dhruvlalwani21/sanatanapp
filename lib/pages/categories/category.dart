@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
-import 'package:sanatan_dharmaya/components/cards/aarti.card.dart';
+import 'package:sanatan_dharmaya/components/cards/pagecard.dart';
 
 class Pages extends StatefulWidget {
-  const Pages({required this.categorytitle});
+  const Pages({required this.categorytitle, required this.categoryid});
   final String categorytitle;
+  final String categoryid;
   @override
   State<Pages> createState() => _PagesState();
 }
@@ -24,13 +25,14 @@ class _PagesState extends State<Pages> {
 
   Future<void> fetchData() async {
     final aartiUrl = Uri.parse(
-        'https://sanatandharmaya.com/server/app/pages/aarti/all/$Language');
+        'https://sanatandharmaya.com/server/app/pages/aarti/all/$Language/${widget.categoryid}');
+
     final templeUrl = Uri.parse(
-        'https://sanatandharmaya.com/server/app/pages/temples/all/$Language');
+        'https://sanatandharmaya.com/server/app/pages/temples/all/$Language/${widget.categoryid}');
     final blogsUrl = Uri.parse(
-        'https://sanatandharmaya.com/server/app/pages/blogs/all/$Language');
+        'https://sanatandharmaya.com/server/app/pages/blogs/all/$Language/${widget.categoryid}');
     final extraUrl = Uri.parse(
-        'https://sanatandharmaya.com/server/app/pages/extra/all/$Language');
+        'https://sanatandharmaya.com/server/app/pages/extra/all/$Language/${widget.categoryid}');
 
     try {
       final aartiResponse = await http.get(aartiUrl);
@@ -42,12 +44,15 @@ class _PagesState extends State<Pages> {
       combinedResponses.addAll(json.decode(templeResponse.body));
       combinedResponses.addAll(json.decode(blogsResponse.body));
       combinedResponses.addAll(json.decode(extraResponse.body));
+
       setState(() {
         pages = combinedResponses.map((item) {
           return {
             'title': item['title'] as String,
             'image': item['page'][0]['image'] as String,
+            'style': item['page'][0]['pagestyle'] as String,
             'category': item['page'][0]['categoryname'][0]['Name'] as String,
+            'catid': item['page'][0]['categoryname'][0]['_id'] as String,
             'color':
                 item['page'][0]['categoryname'][0]['Headfontcolor'] as String,
             'id': item['_id'] as String,
@@ -90,7 +95,7 @@ class _PagesState extends State<Pages> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(left: 10),
+                margin: const EdgeInsets.only(left: 10),
                 child: Text(
                   widget.categorytitle,
                   style: GoogleFonts.poppins(
@@ -117,17 +122,20 @@ class _PagesState extends State<Pages> {
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2),
-                    children: pages.map((blog) {
-                      var title = parse(blog['title']!);
+                    children: pages.map((data) {
+                      var title = parse(data['title']!);
                       String parsedString = parse(title.documentElement!.text)
                           .documentElement!
                           .text;
-                      return AartiCard(
-                          image: blog['image']!,
-                          category: blog['category']!,
-                          color: blog['color']!,
-                          title: parsedString,
-                          id: blog['id']!);
+                      return PageCard(
+                        image: data['image']!,
+                        category: data['category']!,
+                        color: data['color']!,
+                        title: parsedString,
+                        id: data['id']!,
+                        style: data['style']!,
+                        catid: data['catid']!,
+                      );
                     }).toList(),
                   )
                 ],

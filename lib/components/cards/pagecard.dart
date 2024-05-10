@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sanatan_dharmaya/pages/pagestyles/aarti.dart';
+import 'package:sanatan_dharmaya/pages/pagestyles/blog.dart';
+import 'package:sanatan_dharmaya/pages/pagestyles/temple.dart';
+import 'package:sanatan_dharmaya/pages/pagestyles/extra.dart';
+import 'package:from_css_color/from_css_color.dart';
 
-class AartiCard extends StatelessWidget {
-  const AartiCard(
+class PageCard extends StatelessWidget {
+  const PageCard(
       {super.key,
       required this.image,
       required this.category,
@@ -42,38 +46,38 @@ class AartiCard extends StatelessWidget {
                 image: image.toString(),
                 link: 'https://sanatandharmaya.com/server/app/pages/aarti/$id',
                 category: category,
-                color: color,
+                color: fromCssColor(color).toString(),
               ));
         }
         if (style == 'temple') {
           PageRedirector(
               context,
-              Aarti(
+              Temple(
                 image: image.toString(),
                 link:
                     'https://sanatandharmaya.com/server/app/pages/temples/$id',
                 category: category,
-                color: color,
+                color: fromCssColor(color).toString(),
               ));
         }
         if (style == 'blog') {
           PageRedirector(
               context,
-              Aarti(
+              PageBlog(
                 image: image.toString(),
                 link: 'https://sanatandharmaya.com/server/app/pages/blogs/$id',
                 category: category,
-                color: color,
+                color: fromCssColor(color).toString(),
               ));
         }
         if (style == 'extra') {
           PageRedirector(
               context,
-              Aarti(
+              ExtraPage(
                 image: image.toString(),
                 link: 'https://sanatandharmaya.com/server/app/pages/extra/$id',
                 category: category,
-                color: color,
+                color: fromCssColor(color).toString(),
               ));
         }
       },

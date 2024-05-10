@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "618397698961",
+    "project_id": "sanatan-dharmaya",
+    "storage_bucket": "sanatan-dharmaya.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:618397698961:android:944de243bb8e0a256c2830",
+        "android_client_info": {
+          "package_name": "com.example.sanatan_dharmaya"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDl7hPIcYwPle6Pqm1UEJxArueYg6rPXRg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

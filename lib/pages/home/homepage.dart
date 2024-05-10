@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:html/parser.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
+import 'package:from_css_color/from_css_color.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sanatan_dharmaya/components/Appbar.component.dart';
@@ -64,7 +65,11 @@ class _HomeState extends State<Home> {
           return {
             'name': item['Name'] as String,
             'icon': item['Icon'] as String,
+            'id': item['_id'] as String,
             'count': item['pagesCount'] as int,
+            'Colorleft': item['Colorleft'] as String,
+            'Colorright': item['Colorright'] as String,
+            'Headfontcolor': item['Headfontcolor'] as String,
           };
         }));
         blogs = List<Map<String, dynamic>>.from(
@@ -104,12 +109,12 @@ class _HomeState extends State<Home> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          AppbarComponent(
+          const AppbarComponent(
             title: "",
           ),
           if (loading)
             Container(
-              margin: EdgeInsets.only(top: 200),
+              margin: const EdgeInsets.only(top: 200),
               child: const CircularProgressIndicator(
                 color: Colors.orange,
               ),
@@ -117,11 +122,11 @@ class _HomeState extends State<Home> {
           if (loading == false)
             Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 BannerCarousel(images: bannerImages),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 CategorySection(categories: categories),
@@ -154,7 +159,7 @@ class BannerCarousel extends StatelessWidget {
           builder: (BuildContext context) {
             return Container(
               width: MediaQuery.of(context).size.width,
-              margin: EdgeInsets.symmetric(horizontal: 5.0),
+              margin: const EdgeInsets.symmetric(horizontal: 5.0),
               decoration: BoxDecoration(
                 color: Colors.grey,
                 borderRadius: BorderRadius.circular(8.0),
@@ -181,7 +186,7 @@ class CategorySection extends StatelessWidget {
     return Column(
       children: [
         Container(
-          margin: EdgeInsets.only(left: 15, top: 6),
+          margin: const EdgeInsets.only(left: 15, top: 6),
           alignment: Alignment.centerLeft,
           child: Text(
             'All Categories',
@@ -192,7 +197,7 @@ class CategorySection extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.all(15),
+          padding: const EdgeInsets.all(15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -205,28 +210,30 @@ class CategorySection extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => Pages(
                                 categorytitle: category['name']!,
+                                categoryid: category['id']!,
                               )),
                     );
                   },
                   child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 7),
+                    margin: const EdgeInsets.symmetric(vertical: 7),
                     alignment: Alignment.center,
                     height: 80,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         gradient: LinearGradient(
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,
                             colors: [
-                              const Color.fromARGB(255, 255, 99, 88),
-                              const Color.fromARGB(255, 255, 157, 157)
+                              fromCssColor(category['Colorleft']!),
+                              fromCssColor(category['Colorright']!),
                             ])),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(4.0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -234,13 +241,14 @@ class CategorySection extends StatelessWidget {
                               Text(
                                 category['name']!,
                                 style: TextStyle(
-                                    color: Colors.white,
+                                    color: fromCssColor(
+                                        category['Headfontcolor']!),
                                     fontWeight: FontWeight.w600,
                                     fontSize: 16),
                               ),
                               Text(
                                 category['count']!.toString(),
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w600,
                                     fontSize: 20),
@@ -285,7 +293,7 @@ class DonationsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       Container(
-        margin: EdgeInsets.only(left: 15, top: 6),
+        margin: const EdgeInsets.only(left: 15, top: 6),
         alignment: Alignment.centerLeft,
         child: Text(
           'Donations',
@@ -296,7 +304,7 @@ class DonationsSection extends StatelessWidget {
         ),
       ),
       Padding(
-          padding: EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(10.0),
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: donations.map((donations) {
@@ -320,15 +328,16 @@ class DonationsSection extends StatelessWidget {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                        color: Color.fromRGBO(255, 255, 255, 1),
+                        color: const Color.fromRGBO(255, 255, 255, 1),
                         borderRadius: BorderRadius.circular(8),
-                        boxShadow: [
+                        boxShadow: const [
                           BoxShadow(
-                              color: const Color.fromRGBO(32, 27, 57, 0.08),
+                              color: Color.fromRGBO(32, 27, 57, 0.08),
                               spreadRadius: 1,
                               blurRadius: 40)
                         ]),
-                    margin: EdgeInsets.symmetric(horizontal: 3, vertical: 5),
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 3, vertical: 5),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -344,7 +353,7 @@ class DonationsSection extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                              margin: EdgeInsets.only(left: 10, top: 5),
+                              margin: const EdgeInsets.only(left: 10, top: 5),
                               child: Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -372,7 +381,7 @@ class DonationsSection extends StatelessWidget {
                                           fontWeight: FontWeight.w600),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
                                   SizedBox(
@@ -390,7 +399,7 @@ class DonationsSection extends StatelessWidget {
                                           fontWeight: FontWeight.w400),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 2,
                                   ),
                                   Row(
@@ -413,12 +422,14 @@ class DonationsSection extends StatelessWidget {
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               alignment: Alignment.centerRight,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(100),
-                                  color: Color.fromARGB(82, 255, 109, 158)),
-                              child: Icon(Icons.keyboard_arrow_right_outlined),
+                                  color:
+                                      const Color.fromARGB(82, 255, 109, 158)),
+                              child: const Icon(
+                                  Icons.keyboard_arrow_right_outlined),
                             )
                           ],
                         ),
@@ -441,7 +452,7 @@ class BlogsSection extends StatelessWidget {
     return Column(
       children: [
         Container(
-          margin: EdgeInsets.only(left: 15, top: 6),
+          margin: const EdgeInsets.only(left: 15, top: 6),
           alignment: Alignment.centerLeft,
           child: Text(
             'Blogs',
@@ -452,7 +463,7 @@ class BlogsSection extends StatelessWidget {
           ),
         ),
         Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
@@ -479,15 +490,16 @@ class BlogsSection extends StatelessWidget {
                     child: Container(
                       width: 166,
                       decoration: BoxDecoration(
-                          color: Color.fromRGBO(255, 255, 255, 1),
+                          color: const Color.fromRGBO(255, 255, 255, 1),
                           borderRadius: BorderRadius.circular(8),
                           boxShadow: [
-                            BoxShadow(
-                                color: const Color.fromRGBO(32, 27, 57, 0.08),
+                            const BoxShadow(
+                                color: Color.fromRGBO(32, 27, 57, 0.08),
                                 spreadRadius: 1,
                                 blurRadius: 40)
                           ]),
-                      margin: EdgeInsets.symmetric(horizontal: 3, vertical: 5),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 3, vertical: 5),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -500,7 +512,7 @@ class BlogsSection extends StatelessWidget {
                                 fit: BoxFit.fill,
                               )),
                           Container(
-                            margin: EdgeInsets.only(left: 10, top: 5),
+                            margin: const EdgeInsets.only(left: 10, top: 5),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -530,16 +542,17 @@ class BlogsSection extends StatelessWidget {
                               ],
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
                           SizedBox(
                             height: 35,
                             child: Container(
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                 vertical: 4,
                               ),
-                              margin: EdgeInsets.symmetric(horizontal: 10),
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 10),
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),

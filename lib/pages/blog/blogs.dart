@@ -117,14 +117,16 @@ class _BlogsState extends State<Blogs> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ClipRRect(
-                                borderRadius: BorderRadius.circular(25),
-                                child: Image.network(
-                                  blog['image']!,
-                                  width: 150,
-                                  height: 115,
-                                  fit: BoxFit.fill,
-                                )),
+                            Center(
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(25),
+                                  child: Image.network(
+                                    blog['image']!,
+                                    width: 150,
+                                    height: 115,
+                                    fit: BoxFit.fill,
+                                  )),
+                            ),
                             Container(
                               margin: EdgeInsets.only(left: 10, top: 5),
                               child: Column(
