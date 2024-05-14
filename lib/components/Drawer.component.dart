@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sanatan_dharmaya/utils/CustomImage.dart';
 
 class DrawerComponent extends StatelessWidget {
@@ -7,7 +9,7 @@ class DrawerComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<DrawerMenuModel> MenuList = [
+    List<DrawerMenuModel> menuList = [
       DrawerMenuModel(icon: 'assets/icons/collection.svg', name: "Collection"),
       DrawerMenuModel(icon: 'assets/icons/heart-red.svg', name: "Wishlist"),
       DrawerMenuModel(icon: 'assets/icons/history.svg', name: "History"),
@@ -37,20 +39,474 @@ class DrawerComponent extends StatelessWidget {
     ];
 
     return Drawer(
-      shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
-      child: ListView(
-        children: List.generate(
-            MenuList.length,
-            (index) => ListTile(
-                  leading: CustomImageView(
-                    border: Border.all(width: 0),
-                    imagePath: MenuList[index].icon,
-                    height: 35,
-                    width: 35,
+      shape: const BeveledRectangleBorder(borderRadius: BorderRadius.zero),
+      child: ListView(children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    child: CustomImageView(
+                      border: Border.all(width: 0),
+                      imagePath: "assets/imgs/logo.svg",
+                      height: 100,
+                      width: 100,
+                    ),
                   ),
-                  title: Text(MenuList[index].name),
-                )),
-      ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: CustomImageView(
+                      border: Border.all(width: 0),
+                      imagePath: "assets/icons/menu.svg",
+                      height: 45,
+                      width: 45,
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child:
+                          Container(color: Colors.grey, width: 60, height: 60),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Username",
+                            style: GoogleFonts.nunitoSans(
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.w600,
+                            )),
+                        Text("user@email.com",
+                            style: GoogleFonts.nunitoSans(
+                              fontSize: 14.0,
+                            )),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        Column(children: [
+          Container(
+            alignment: Alignment.centerLeft,
+            margin: const EdgeInsets.only(left: 16, bottom: 5, top: 15),
+            child: Text("General",
+                textAlign: TextAlign.left,
+                style: GoogleFonts.nunitoSans(
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black45)),
+          ),
+          ListTile(
+            leading: CustomImageView(
+              border: Border.all(width: 0),
+              imagePath: menuList[0].icon,
+              height: 35,
+              width: 35,
+            ),
+            title: Text(menuList[0].name),
+            trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+          ),
+          Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                          width: 1,
+                          color: Color.fromARGB(255, 221, 221, 221))))),
+          ListTile(
+            leading: CustomImageView(
+              border: Border.all(width: 0),
+              imagePath: menuList[1].icon,
+              height: 35,
+              width: 35,
+            ),
+            title: Text(menuList[1].name),
+            trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+          ),
+          Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                          width: 1,
+                          color: Color.fromARGB(255, 221, 221, 221))))),
+          ListTile(
+            leading: CustomImageView(
+              border: Border.all(width: 0),
+              imagePath: menuList[2].icon,
+              height: 35,
+              width: 35,
+            ),
+            title: Text(menuList[2].name),
+            trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+          ),
+          Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                          width: 1,
+                          color: Color.fromARGB(255, 221, 221, 221))))),
+          ListTile(
+            leading: CustomImageView(
+              border: Border.all(width: 0),
+              imagePath: menuList[3].icon,
+              height: 35,
+              width: 35,
+            ),
+            title: Text(menuList[3].name),
+            trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+          ),
+          Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                          width: 1,
+                          color: Color.fromARGB(255, 221, 221, 221))))),
+          Container(
+            alignment: Alignment.centerLeft,
+            margin: const EdgeInsets.only(left: 16, bottom: 5, top: 15),
+            child: Text("Account Settings",
+                textAlign: TextAlign.left,
+                style: GoogleFonts.nunitoSans(
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black45)),
+          ),
+          ListTile(
+            leading: CustomImageView(
+              border: Border.all(width: 0),
+              imagePath: menuList[4].icon,
+              height: 35,
+              width: 35,
+            ),
+            title: Text(menuList[4].name),
+            trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+          ),
+          Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                          width: 1,
+                          color: Color.fromARGB(255, 221, 221, 221))))),
+          ListTile(
+            leading: CustomImageView(
+              border: Border.all(width: 0),
+              imagePath: menuList[5].icon,
+              height: 35,
+              width: 35,
+            ),
+            title: Text(menuList[5].name),
+            trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+          ),
+          Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                          width: 1,
+                          color: Color.fromARGB(255, 221, 221, 221))))),
+          ListTile(
+            leading: CustomImageView(
+              border: Border.all(width: 0),
+              imagePath: menuList[6].icon,
+              height: 35,
+              width: 35,
+            ),
+            title: Text(menuList[6].name),
+            trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+          ),
+          Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                          width: 1,
+                          color: Color.fromARGB(255, 221, 221, 221))))),
+          ListTile(
+            leading: CustomImageView(
+              border: Border.all(width: 0),
+              imagePath: menuList[7].icon,
+              height: 35,
+              width: 35,
+            ),
+            title: Text(menuList[7].name),
+            trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+          ),
+          Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                          width: 1,
+                          color: Color.fromARGB(255, 221, 221, 221))))),
+          Container(
+            alignment: Alignment.centerLeft,
+            margin: const EdgeInsets.only(left: 16, bottom: 5, top: 15),
+            child: Text("App Settings",
+                textAlign: TextAlign.left,
+                style: GoogleFonts.nunitoSans(
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black45)),
+          ),
+          ListTile(
+            leading: CustomImageView(
+              border: Border.all(width: 0),
+              imagePath: menuList[8].icon,
+              height: 35,
+              width: 35,
+            ),
+            title: Text(menuList[8].name),
+            trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+          ),
+          Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                          width: 1,
+                          color: Color.fromARGB(255, 221, 221, 221))))),
+          ListTile(
+            leading: CustomImageView(
+              border: Border.all(width: 0),
+              imagePath: menuList[9].icon,
+              height: 35,
+              width: 35,
+            ),
+            title: Text(menuList[9].name),
+            trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+          ),
+          Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                          width: 1,
+                          color: Color.fromARGB(255, 221, 221, 221))))),
+          ListTile(
+            leading: CustomImageView(
+              border: Border.all(width: 0),
+              imagePath: menuList[10].icon,
+              height: 35,
+              width: 35,
+            ),
+            title: Text(menuList[10].name),
+            trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+          ),
+          Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                          width: 1,
+                          color: Color.fromARGB(255, 221, 221, 221))))),
+          ListTile(
+            leading: CustomImageView(
+              border: Border.all(width: 0),
+              imagePath: menuList[11].icon,
+              height: 35,
+              width: 35,
+            ),
+            title: Text(menuList[11].name),
+            trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+          ),
+          Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                          width: 1,
+                          color: Color.fromARGB(255, 221, 221, 221))))),
+          ListTile(
+            leading: CustomImageView(
+              border: Border.all(width: 0),
+              imagePath: menuList[12].icon,
+              height: 35,
+              width: 35,
+            ),
+            title: Text(menuList[12].name),
+            trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+          ),
+          Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                          width: 1,
+                          color: Color.fromARGB(255, 221, 221, 221))))),
+          Container(
+            alignment: Alignment.centerLeft,
+            margin: const EdgeInsets.only(left: 16, bottom: 5, top: 15),
+            child: Text("Support",
+                textAlign: TextAlign.left,
+                style: GoogleFonts.nunitoSans(
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black45)),
+          ),
+          ListTile(
+            leading: CustomImageView(
+              border: Border.all(width: 0),
+              imagePath: menuList[15].icon,
+              height: 35,
+              width: 35,
+            ),
+            title: Text(menuList[15].name),
+            trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+          ),
+          Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                          width: 1,
+                          color: Color.fromARGB(255, 221, 221, 221))))),
+          ListTile(
+            leading: CustomImageView(
+              border: Border.all(width: 0),
+              imagePath: menuList[14].icon,
+              height: 35,
+              width: 35,
+            ),
+            title: Text(menuList[14].name),
+            trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+          ),
+          Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                          width: 1,
+                          color: Color.fromARGB(255, 221, 221, 221))))),
+          Container(
+            alignment: Alignment.centerLeft,
+            margin: const EdgeInsets.only(left: 16, bottom: 5, top: 15),
+            child: Text("Information",
+                textAlign: TextAlign.left,
+                style: GoogleFonts.nunitoSans(
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black45)),
+          ),
+          ListTile(
+            leading: CustomImageView(
+              border: Border.all(width: 0),
+              imagePath: menuList[15].icon,
+              height: 35,
+              width: 35,
+            ),
+            title: Text(menuList[15].name),
+            trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+          ),
+          Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                          width: 1,
+                          color: Color.fromARGB(255, 221, 221, 221))))),
+          ListTile(
+            leading: CustomImageView(
+              border: Border.all(width: 0),
+              imagePath: menuList[16].icon,
+              height: 35,
+              width: 35,
+            ),
+            title: Text(menuList[16].name),
+            trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+          ),
+          Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                          width: 1,
+                          color: Color.fromARGB(255, 221, 221, 221))))),
+          ListTile(
+            leading: CustomImageView(
+              border: Border.all(width: 0),
+              imagePath: menuList[17].icon,
+              height: 35,
+              width: 35,
+            ),
+            title: Text(menuList[17].name),
+            trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+          ),
+          Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                          width: 1,
+                          color: Color.fromARGB(255, 221, 221, 221))))),
+          ListTile(
+            leading: CustomImageView(
+              border: Border.all(width: 0),
+              imagePath: menuList[18].icon,
+              height: 35,
+              width: 35,
+            ),
+            title: Text(menuList[18].name),
+            trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+          ),
+          Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                          width: 1,
+                          color: Color.fromARGB(255, 221, 221, 221))))),
+          ListTile(
+            leading: CustomImageView(
+              border: Border.all(width: 0),
+              imagePath: menuList[19].icon,
+              height: 35,
+              width: 35,
+            ),
+            title: Text(menuList[19].name),
+            trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+          ),
+          Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                          width: 1,
+                          color: Color.fromARGB(255, 221, 221, 221))))),
+          ListTile(
+            leading: CustomImageView(
+              border: Border.all(width: 0),
+              imagePath: menuList[20].icon,
+              height: 35,
+              width: 35,
+            ),
+            title: Text(menuList[20].name),
+            trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+          ),
+        ])
+      ]),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:sanatan_dharmaya/pages/categories/category.dart';
 import 'package:from_css_color/from_css_color.dart';
+import 'package:sanatan_dharmaya/utils/imageHandler.dart';
 import '../../components/Appbar.component.dart';
 
 class Categories extends StatefulWidget {
@@ -144,7 +145,8 @@ class CategorySection extends StatelessWidget {
                           height: 56,
                           width: 56,
                           child: category['icon']!.isNotEmpty
-                              ? Image.network(category['icon']!)
+                              ? imageHandler(image: category['icon']!)
+                              // ? Image.network(category['icon']!)
                               : null,
                         )
                       ],

@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:sanatan_dharmaya/utils/CustomImage.dart';
 import 'package:share_plus/share_plus.dart';
 import 'dart:convert';
+import 'package:quill_html_converter/quill_html_converter.dart';
 import 'package:html/parser.dart';
 import 'package:video_player/video_player.dart';
 
@@ -56,17 +57,17 @@ class _AartiState extends State<Aarti> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Row(children: [
-          SizedBox(
+          const SizedBox(
             width: 6,
           ),
           Container(
             width: 50,
             height: 50,
             decoration: BoxDecoration(
-                color: Color.fromARGB(52, 255, 153, 0),
+                color: const Color.fromARGB(52, 255, 153, 0),
                 borderRadius: BorderRadius.circular(100)),
             child: IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.keyboard_arrow_left_outlined,
                 color: Colors.amber,
               ),
@@ -77,7 +78,7 @@ class _AartiState extends State<Aarti> {
           ),
           if (data.isNotEmpty)
             Container(
-              margin: EdgeInsets.only(left: 10),
+              margin: const EdgeInsets.only(left: 10),
               child: Text(
                 parse(parse(data['title']!).documentElement!.text)
                     .documentElement!
@@ -104,7 +105,7 @@ class _AartiState extends State<Aarti> {
                 automaticallyImplyLeading: false,
                 flexibleSpace: FlexibleSpaceBar(
                   background: Container(
-                    margin: EdgeInsets.only(bottom: 10, top: 0),
+                    margin: const EdgeInsets.only(bottom: 10, top: 0),
                     alignment: Alignment.center,
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(25),
@@ -117,22 +118,29 @@ class _AartiState extends State<Aarti> {
                   ),
                 ),
                 bottom: PreferredSize(
-                  preferredSize: Size.fromHeight(48.0),
+                  preferredSize: const Size.fromHeight(48.0),
                   child: Container(
                     color: Colors.white,
                     child: TabBar(
                       indicatorSize: TabBarIndicatorSize.tab,
-                      indicatorPadding:
-                          EdgeInsets.symmetric(vertical: 6, horizontal: 4),
+                      indicatorPadding: const EdgeInsets.symmetric(
+                          vertical: 6, horizontal: 4),
                       labelColor: Colors.white,
                       indicator: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: Colors.orange,
                       ),
                       tabs: [
-                        Tab(text: 'Description'),
-                        Tab(text: 'Aarti'),
-                        Tab(text: 'Media'),
+                        const Tab(text: 'Description'),
+                        Tab(
+                            text: data.isNotEmpty
+                                ? parse(parse(data['middletitle']!)
+                                        .documentElement!
+                                        .text)
+                                    .documentElement!
+                                    .text
+                                : ""),
+                        const Tab(text: 'Media'),
                       ],
                     ),
                   ),
@@ -144,7 +152,7 @@ class _AartiState extends State<Aarti> {
             children: [
               Container(child: _buildview1(BuildContext, context)),
               Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Center(
                     child: _buildview2(BuildContext, context),
                   )),
@@ -178,7 +186,7 @@ class _AartiState extends State<Aarti> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           if (data.isNotEmpty)
@@ -186,7 +194,8 @@ class _AartiState extends State<Aarti> {
               parse(parse(data['title']!).documentElement!.text)
                   .documentElement!
                   .text,
-              style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+              style:
+                  const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
             ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -194,7 +203,7 @@ class _AartiState extends State<Aarti> {
               Container(
                 child: Text(
                   widget.category,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 12.0,
                       fontWeight: FontWeight.w600,
                       color: Colors.red),
@@ -209,13 +218,13 @@ class _AartiState extends State<Aarti> {
                           color: const Color.fromARGB(38, 104, 58, 183)),
                       child: IconButton(
                           onPressed: sharehandler,
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.share,
                             color: Color.fromARGB(255, 50, 0, 168),
                             size: 23,
                           )),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     CustomImageView(
@@ -235,7 +244,7 @@ class _AartiState extends State<Aarti> {
                 parse(parse(data['innertitle']!).documentElement!.text)
                     .documentElement!
                     .text,
-                style: TextStyle(fontSize: 18.0),
+                style: const TextStyle(fontSize: 18.0),
               ),
             ),
           if (data.isNotEmpty)
@@ -245,7 +254,7 @@ class _AartiState extends State<Aarti> {
                 parse(parse(data['innerdescription']!).documentElement!.text)
                     .documentElement!
                     .text,
-                style: TextStyle(fontSize: 18.0),
+                style: const TextStyle(fontSize: 18.0),
               ),
             ),
 
@@ -258,19 +267,12 @@ class _AartiState extends State<Aarti> {
   _buildview2(BuildContext, context) {
     return SingleChildScrollView(
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         if (data.isNotEmpty)
-          SizedBox(
+          const SizedBox(
             height: 20,
-          ),
-        if (data.isNotEmpty)
-          Text(
-            parse(parse(data['middletitle']!).documentElement!.text)
-                .documentElement!
-                .text,
-            style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
           ),
 
         if (data.isNotEmpty)
@@ -280,7 +282,7 @@ class _AartiState extends State<Aarti> {
               parse(parse(data['middledescription']!).documentElement!.text)
                   .documentElement!
                   .text,
-              style: TextStyle(fontSize: 18.0),
+              style: const TextStyle(fontSize: 18.0),
             ),
           ),
         if (data.isNotEmpty)
@@ -290,7 +292,7 @@ class _AartiState extends State<Aarti> {
               parse(parse(data['middleinfo']!).documentElement!.text)
                   .documentElement!
                   .text,
-              style: TextStyle(fontSize: 18.0),
+              style: const TextStyle(fontSize: 18.0),
             ),
           ),
 

@@ -14,6 +14,7 @@ import 'package:sanatan_dharmaya/pages/blog/blog.dart';
 import 'package:sanatan_dharmaya/pages/donation/donation.dart';
 import 'package:sanatan_dharmaya/utils/CustomImage.dart';
 import 'package:sanatan_dharmaya/pages/categories/category.dart';
+import 'package:sanatan_dharmaya/utils/imageHandler.dart';
 
 class Home extends StatefulWidget {
   Home({super.key});
@@ -260,7 +261,7 @@ class CategorySection extends StatelessWidget {
                           height: 56,
                           width: 56,
                           child: category['icon']!.isNotEmpty
-                              ? Image.network(category['icon']!)
+                              ? imageHandler(image: category['icon']!)
                               : null,
                         )
                       ],

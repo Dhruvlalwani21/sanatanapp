@@ -69,79 +69,78 @@ class _PagesState extends State<Pages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
-      body: Column(
-        children: [
-          AppBar(
-            automaticallyImplyLeading: false,
-            title: Row(children: [
-              const SizedBox(
-                width: 6,
-              ),
-              Container(
-                width: 50,
-                height: 50,
-                decoration: BoxDecoration(
-                    color: const Color.fromARGB(52, 255, 153, 0),
-                    borderRadius: BorderRadius.circular(100)),
-                child: IconButton(
-                  icon: const Icon(
-                    Icons.keyboard_arrow_left_outlined,
-                    color: Colors.amber,
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(left: 10),
-                child: Text(
-                  widget.categorytitle,
-                  style: GoogleFonts.poppins(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ]),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Row(children: [
+          const SizedBox(
+            width: 6,
           ),
-          if (loading)
-            const CircularProgressIndicator(
-              color: Colors.orange,
+          Container(
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+                color: const Color.fromARGB(52, 255, 153, 0),
+                borderRadius: BorderRadius.circular(100)),
+            child: IconButton(
+              icon: const Icon(
+                Icons.keyboard_arrow_left_outlined,
+                color: Colors.amber,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
-          if (loading == false)
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  GridView(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2),
-                    children: pages.map((data) {
-                      var title = parse(data['title']!);
-                      String parsedString = parse(title.documentElement!.text)
-                          .documentElement!
-                          .text;
-                      return PageCard(
-                        image: data['image']!,
-                        category: data['category']!,
-                        color: data['color']!,
-                        title: parsedString,
-                        id: data['id']!,
-                        style: data['style']!,
-                        catid: data['catid']!,
-                      );
-                    }).toList(),
-                  )
-                ],
+          ),
+          Container(
+            margin: const EdgeInsets.only(left: 10),
+            child: Text(
+              widget.categorytitle,
+              style: GoogleFonts.poppins(
+                fontSize: 18.0,
+                fontWeight: FontWeight.w600,
               ),
             ),
-        ],
+          ),
+        ]),
+      ),
+      backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            if (loading)
+              Container(
+                margin: EdgeInsets.only(top: 150),
+                alignment: Alignment.center,
+                child: const CircularProgressIndicator(
+                  color: Colors.orange,
+                ),
+              ),
+            if (loading == false)
+              GridView(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
+                children: pages.map((data) {
+                  var title = parse(data['title']!);
+                  String parsedString =
+                      parse(title.documentElement!.text).documentElement!.text;
+                  return PageCard(
+                    image: data['image']!,
+                    category: data['category']!,
+                    color: data['color']!,
+                    title: parsedString,
+                    id: data['id']!,
+                    style: data['style']!,
+                    catid: data['catid']!,
+                  );
+                }).toList(),
+              ),
+            SizedBox(
+              height: 15,
+            )
+          ],
+        ),
       ),
     );
   }

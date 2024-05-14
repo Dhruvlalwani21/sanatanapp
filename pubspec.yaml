@@ -47,6 +47,10 @@ dependencies:
   from_css_color:
   google_sign_in:
   firebase_auth:
+  flutter_quill:
+  flutter_map:
+  quill_html_converter: ^9.3.10
+  flutter_quill_extensions: ^9.3.10
 dev_dependencies:
   flutter_test:
     sdk: flutter
