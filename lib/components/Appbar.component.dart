@@ -11,13 +11,18 @@ class AppbarComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: Container(
-        margin: EdgeInsets.only(left: 10),
-        child: CustomImageView(
-          border: Border.all(width: 0),
-          imagePath: "assets/icons/menu.svg",
-          height: 25,
-          width: 25,
+      leading: GestureDetector(
+        onTap: () {
+          Scaffold.of(context).openDrawer();
+        },
+        child: Container(
+          margin: EdgeInsets.only(left: 10),
+          child: CustomImageView(
+            border: Border.all(width: 0),
+            imagePath: "assets/icons/menu.svg",
+            height: 25,
+            width: 25,
+          ),
         ),
       ),
       title: Row(

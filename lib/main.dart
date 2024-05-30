@@ -4,7 +4,7 @@ import 'package:sanatan_dharmaya/pages/blog/blogs.dart';
 import 'package:sanatan_dharmaya/pages/categories/categories.dart';
 import 'package:sanatan_dharmaya/pages/donation/donations.dart';
 import 'package:sanatan_dharmaya/pages/home/homepage.dart';
-import 'package:sanatan_dharmaya/pages/profile/profile.dart';
+import 'package:sanatan_dharmaya/pages/settings/settings.dart';
 import 'package:sanatan_dharmaya/utils/CustomImage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -30,6 +30,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Sanatan Dharmaya',
       theme: ThemeData(
+        textTheme: GoogleFonts.poppinsTextTheme(textTheme),
+        primaryTextTheme: textTheme,
+        primaryColor: Colors.orange,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.orangeAccent),
         useMaterial3: true,
       ),
@@ -69,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
         icon: 'assets/icons/bottom/user.svg',
         color: Colors.redAccent)
   ];
-  List<Widget> Pages = [Home(), Categories(), Donations(), Blogs(), Profile()];
+  List<Widget> Pages = [Home(), Categories(), Donations(), Blogs(), Settings()];
 
   @override
   Widget build(BuildContext context) {

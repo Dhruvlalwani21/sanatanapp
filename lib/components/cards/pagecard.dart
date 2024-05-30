@@ -117,7 +117,9 @@ class PageCard extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.poppins(
-                      fontSize: 12, fontWeight: FontWeight.w600),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black),
                 ),
               ),
             ),

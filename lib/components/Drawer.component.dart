@@ -2,6 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sanatan_dharmaya/pages/settings/disclaimer.dart';
+import 'package:sanatan_dharmaya/pages/settings/languages.dart';
+import 'package:sanatan_dharmaya/pages/settings/tnc.dart';
+import 'package:sanatan_dharmaya/pages/settings/about.dart';
 import 'package:sanatan_dharmaya/utils/CustomImage.dart';
 
 class DrawerComponent extends StatelessWidget {
@@ -9,6 +13,17 @@ class DrawerComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future PageRedirector(context, Page) {
+      return Navigator.push(
+          context,
+          PageRouteBuilder(
+              transitionDuration: Duration.zero,
+              reverseTransitionDuration: Duration.zero,
+              pageBuilder: (BuildContext context, Animation<double> animation,
+                      Animation<double> secondaryAnimation) =>
+                  Page));
+    }
+
     List<DrawerMenuModel> menuList = [
       DrawerMenuModel(icon: 'assets/icons/collection.svg', name: "Collection"),
       DrawerMenuModel(icon: 'assets/icons/heart-red.svg', name: "Wishlist"),
@@ -122,7 +137,10 @@ class DrawerComponent extends StatelessWidget {
               height: 35,
               width: 35,
             ),
-            title: Text(menuList[0].name),
+            title: Text(
+              menuList[0].name,
+              style: GoogleFonts.nunitoSans(),
+            ),
             trailing: const Icon(Icons.keyboard_arrow_right_rounded),
           ),
           Container(
@@ -139,7 +157,10 @@ class DrawerComponent extends StatelessWidget {
               height: 35,
               width: 35,
             ),
-            title: Text(menuList[1].name),
+            title: Text(
+              menuList[1].name,
+              style: GoogleFonts.nunitoSans(),
+            ),
             trailing: const Icon(Icons.keyboard_arrow_right_rounded),
           ),
           Container(
@@ -156,7 +177,10 @@ class DrawerComponent extends StatelessWidget {
               height: 35,
               width: 35,
             ),
-            title: Text(menuList[2].name),
+            title: Text(
+              menuList[2].name,
+              style: GoogleFonts.nunitoSans(),
+            ),
             trailing: const Icon(Icons.keyboard_arrow_right_rounded),
           ),
           Container(
@@ -173,7 +197,10 @@ class DrawerComponent extends StatelessWidget {
               height: 35,
               width: 35,
             ),
-            title: Text(menuList[3].name),
+            title: Text(
+              menuList[3].name,
+              style: GoogleFonts.nunitoSans(),
+            ),
             trailing: const Icon(Icons.keyboard_arrow_right_rounded),
           ),
           Container(
@@ -200,7 +227,10 @@ class DrawerComponent extends StatelessWidget {
               height: 35,
               width: 35,
             ),
-            title: Text(menuList[4].name),
+            title: Text(
+              menuList[4].name,
+              style: GoogleFonts.nunitoSans(),
+            ),
             trailing: const Icon(Icons.keyboard_arrow_right_rounded),
           ),
           Container(
@@ -217,7 +247,10 @@ class DrawerComponent extends StatelessWidget {
               height: 35,
               width: 35,
             ),
-            title: Text(menuList[5].name),
+            title: Text(
+              menuList[5].name,
+              style: GoogleFonts.nunitoSans(),
+            ),
             trailing: const Icon(Icons.keyboard_arrow_right_rounded),
           ),
           Container(
@@ -234,7 +267,10 @@ class DrawerComponent extends StatelessWidget {
               height: 35,
               width: 35,
             ),
-            title: Text(menuList[6].name),
+            title: Text(
+              menuList[6].name,
+              style: GoogleFonts.nunitoSans(),
+            ),
             trailing: const Icon(Icons.keyboard_arrow_right_rounded),
           ),
           Container(
@@ -251,7 +287,10 @@ class DrawerComponent extends StatelessWidget {
               height: 35,
               width: 35,
             ),
-            title: Text(menuList[7].name),
+            title: Text(
+              menuList[7].name,
+              style: GoogleFonts.nunitoSans(),
+            ),
             trailing: const Icon(Icons.keyboard_arrow_right_rounded),
           ),
           Container(
@@ -278,7 +317,10 @@ class DrawerComponent extends StatelessWidget {
               height: 35,
               width: 35,
             ),
-            title: Text(menuList[8].name),
+            title: Text(
+              menuList[8].name,
+              style: GoogleFonts.nunitoSans(),
+            ),
             trailing: const Icon(Icons.keyboard_arrow_right_rounded),
           ),
           Container(
@@ -289,13 +331,19 @@ class DrawerComponent extends StatelessWidget {
                           width: 1,
                           color: Color.fromARGB(255, 221, 221, 221))))),
           ListTile(
+            onTap: () {
+              PageRedirector(context, Language());
+            },
             leading: CustomImageView(
               border: Border.all(width: 0),
               imagePath: menuList[9].icon,
               height: 35,
               width: 35,
             ),
-            title: Text(menuList[9].name),
+            title: Text(
+              menuList[9].name,
+              style: GoogleFonts.nunitoSans(),
+            ),
             trailing: const Icon(Icons.keyboard_arrow_right_rounded),
           ),
           Container(
@@ -312,7 +360,10 @@ class DrawerComponent extends StatelessWidget {
               height: 35,
               width: 35,
             ),
-            title: Text(menuList[10].name),
+            title: Text(
+              menuList[10].name,
+              style: GoogleFonts.nunitoSans(),
+            ),
             trailing: const Icon(Icons.keyboard_arrow_right_rounded),
           ),
           Container(
@@ -329,7 +380,10 @@ class DrawerComponent extends StatelessWidget {
               height: 35,
               width: 35,
             ),
-            title: Text(menuList[11].name),
+            title: Text(
+              menuList[11].name,
+              style: GoogleFonts.nunitoSans(),
+            ),
             trailing: const Icon(Icons.keyboard_arrow_right_rounded),
           ),
           Container(
@@ -346,7 +400,10 @@ class DrawerComponent extends StatelessWidget {
               height: 35,
               width: 35,
             ),
-            title: Text(menuList[12].name),
+            title: Text(
+              menuList[12].name,
+              style: GoogleFonts.nunitoSans(),
+            ),
             trailing: const Icon(Icons.keyboard_arrow_right_rounded),
           ),
           Container(
@@ -369,11 +426,14 @@ class DrawerComponent extends StatelessWidget {
           ListTile(
             leading: CustomImageView(
               border: Border.all(width: 0),
-              imagePath: menuList[15].icon,
+              imagePath: menuList[13].icon,
               height: 35,
               width: 35,
             ),
-            title: Text(menuList[15].name),
+            title: Text(
+              menuList[13].name,
+              style: GoogleFonts.nunitoSans(),
+            ),
             trailing: const Icon(Icons.keyboard_arrow_right_rounded),
           ),
           Container(
@@ -390,7 +450,10 @@ class DrawerComponent extends StatelessWidget {
               height: 35,
               width: 35,
             ),
-            title: Text(menuList[14].name),
+            title: Text(
+              menuList[14].name,
+              style: GoogleFonts.nunitoSans(),
+            ),
             trailing: const Icon(Icons.keyboard_arrow_right_rounded),
           ),
           Container(
@@ -411,13 +474,19 @@ class DrawerComponent extends StatelessWidget {
                     color: Colors.black45)),
           ),
           ListTile(
+            onTap: () {
+              PageRedirector(context, About());
+            },
             leading: CustomImageView(
               border: Border.all(width: 0),
               imagePath: menuList[15].icon,
               height: 35,
               width: 35,
             ),
-            title: Text(menuList[15].name),
+            title: Text(
+              menuList[15].name,
+              style: GoogleFonts.nunitoSans(),
+            ),
             trailing: const Icon(Icons.keyboard_arrow_right_rounded),
           ),
           Container(
@@ -428,13 +497,19 @@ class DrawerComponent extends StatelessWidget {
                           width: 1,
                           color: Color.fromARGB(255, 221, 221, 221))))),
           ListTile(
+            onTap: () {
+              PageRedirector(context, Tnc());
+            },
             leading: CustomImageView(
               border: Border.all(width: 0),
               imagePath: menuList[16].icon,
               height: 35,
               width: 35,
             ),
-            title: Text(menuList[16].name),
+            title: Text(
+              menuList[16].name,
+              style: GoogleFonts.nunitoSans(),
+            ),
             trailing: const Icon(Icons.keyboard_arrow_right_rounded),
           ),
           Container(
@@ -445,13 +520,19 @@ class DrawerComponent extends StatelessWidget {
                           width: 1,
                           color: Color.fromARGB(255, 221, 221, 221))))),
           ListTile(
+            onTap: () {
+              PageRedirector(context, Disclaimer());
+            },
             leading: CustomImageView(
               border: Border.all(width: 0),
               imagePath: menuList[17].icon,
               height: 35,
               width: 35,
             ),
-            title: Text(menuList[17].name),
+            title: Text(
+              menuList[17].name,
+              style: GoogleFonts.nunitoSans(),
+            ),
             trailing: const Icon(Icons.keyboard_arrow_right_rounded),
           ),
           Container(
@@ -468,7 +549,10 @@ class DrawerComponent extends StatelessWidget {
               height: 35,
               width: 35,
             ),
-            title: Text(menuList[18].name),
+            title: Text(
+              menuList[18].name,
+              style: GoogleFonts.nunitoSans(),
+            ),
             trailing: const Icon(Icons.keyboard_arrow_right_rounded),
           ),
           Container(
@@ -485,7 +569,10 @@ class DrawerComponent extends StatelessWidget {
               height: 35,
               width: 35,
             ),
-            title: Text(menuList[19].name),
+            title: Text(
+              menuList[19].name,
+              style: GoogleFonts.nunitoSans(),
+            ),
             trailing: const Icon(Icons.keyboard_arrow_right_rounded),
           ),
           Container(
@@ -502,7 +589,10 @@ class DrawerComponent extends StatelessWidget {
               height: 35,
               width: 35,
             ),
-            title: Text(menuList[20].name),
+            title: Text(
+              menuList[20].name,
+              style: GoogleFonts.nunitoSans(),
+            ),
             trailing: const Icon(Icons.keyboard_arrow_right_rounded),
           ),
         ])

@@ -5,9 +5,9 @@ import 'package:http/http.dart' as http;
 import 'package:sanatan_dharmaya/utils/CustomImage.dart';
 import 'package:share_plus/share_plus.dart';
 import 'dart:convert';
-import 'package:quill_html_converter/quill_html_converter.dart';
 import 'package:html/parser.dart';
 import 'package:video_player/video_player.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 class Aarti extends StatefulWidget {
   final String link;
@@ -105,23 +105,32 @@ class _AartiState extends State<Aarti> {
                 automaticallyImplyLeading: false,
                 flexibleSpace: FlexibleSpaceBar(
                   background: Container(
-                    margin: const EdgeInsets.only(bottom: 10, top: 0),
-                    alignment: Alignment.center,
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(25),
-                        child: Image.network(
-                          widget.image,
-                          width: 250,
-                          height: 250,
-                          fit: BoxFit.fill,
-                        )),
-                  ),
+                      margin: const EdgeInsets.only(bottom: 10, top: 0),
+                      alignment: Alignment.center,
+                      child: Column(
+                        children: [
+                          if (widget.image == "")
+                            Container(
+                              height: 250,
+                            ),
+                          if (widget.image != "")
+                            ClipRRect(
+                                borderRadius: BorderRadius.circular(25),
+                                child: Image.network(
+                                  widget.image,
+                                  width: 250,
+                                  height: 250,
+                                  fit: BoxFit.fill,
+                                )),
+                        ],
+                      )),
                 ),
                 bottom: PreferredSize(
                   preferredSize: const Size.fromHeight(48.0),
                   child: Container(
                     color: Colors.white,
                     child: TabBar(
+                      isScrollable: true,
                       indicatorSize: TabBarIndicatorSize.tab,
                       indicatorPadding: const EdgeInsets.symmetric(
                           vertical: 6, horizontal: 4),
@@ -150,16 +159,30 @@ class _AartiState extends State<Aarti> {
           },
           body: TabBarView(
             children: [
-              Container(child: _buildview1(BuildContext, context)),
               Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  child: _buildview1(BuildContext, context)),
+              Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
                   child: Center(
                     child: _buildview2(BuildContext, context),
                   )),
               Container(
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Expanded(
                   child: Column(
                     children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "Media",
+                          style: GoogleFonts.poppins(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
                       if (data.isNotEmpty)
                         Expanded(
                           child: ListView.builder(
@@ -194,8 +217,10 @@ class _AartiState extends State<Aarti> {
               parse(parse(data['title']!).documentElement!.text)
                   .documentElement!
                   .text,
-              style:
-                  const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
             ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -240,22 +265,16 @@ class _AartiState extends State<Aarti> {
           if (data.isNotEmpty)
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(
-                parse(parse(data['innertitle']!).documentElement!.text)
-                    .documentElement!
-                    .text,
-                style: const TextStyle(fontSize: 18.0),
-              ),
+              child: HtmlWidget(data['innertitle']!),
             ),
           if (data.isNotEmpty)
             Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: HtmlWidget(data['description']!)),
+          if (data.isNotEmpty)
+            Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(
-                parse(parse(data['innerdescription']!).documentElement!.text)
-                    .documentElement!
-                    .text,
-                style: const TextStyle(fontSize: 18.0),
-              ),
+              child: HtmlWidget(data['innerdescription']!),
             ),
 
           // You can similarly display other data such as documents, etc.
@@ -277,23 +296,12 @@ class _AartiState extends State<Aarti> {
 
         if (data.isNotEmpty)
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              parse(parse(data['middledescription']!).documentElement!.text)
-                  .documentElement!
-                  .text,
-              style: const TextStyle(fontSize: 18.0),
-            ),
-          ),
+              padding: const EdgeInsets.all(8.0),
+              child: HtmlWidget(data['middledescription']!)),
         if (data.isNotEmpty)
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(
-              parse(parse(data['middleinfo']!).documentElement!.text)
-                  .documentElement!
-                  .text,
-              style: const TextStyle(fontSize: 18.0),
-            ),
+            child: HtmlWidget(data['middleinfo']!),
           ),
 
         // You can similarly display other data such as documents, etc.
@@ -331,14 +339,13 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: AspectRatio(
+    return AspectRatio(
         aspectRatio: 16 / 9,
-        child: FlickVideoPlayer(
-          flickManager: flickManager,
-        ),
-      ),
-    );
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(15),
+          child: FlickVideoPlayer(
+            flickManager: flickManager,
+          ),
+        ));
   }
 }

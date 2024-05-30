@@ -4,6 +4,7 @@ import 'package:sanatan_dharmaya/utils/CustomImage.dart';
 import 'package:share_plus/share_plus.dart';
 import 'dart:convert';
 import 'package:html/parser.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 class Blog extends StatefulWidget {
   final String link;
@@ -53,17 +54,17 @@ class _BlogState extends State<Blog> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Row(children: [
-            SizedBox(
+            const SizedBox(
               width: 6,
             ),
             Container(
               width: 50,
               height: 50,
               decoration: BoxDecoration(
-                  color: Color.fromARGB(52, 255, 153, 0),
+                  color: const Color.fromARGB(52, 255, 153, 0),
                   borderRadius: BorderRadius.circular(100)),
               child: IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.keyboard_arrow_left_outlined,
                   color: Colors.amber,
                 ),
@@ -77,22 +78,30 @@ class _BlogState extends State<Blog> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             if (data.isNotEmpty)
               Container(
-                alignment: Alignment.center,
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(25),
-                    child: Image.network(
-                      widget.image,
-                      width: 280,
-                      height: 280,
-                      fit: BoxFit.fill,
-                    )),
-              ),
-            SizedBox(
+                  alignment: Alignment.center,
+                  child: Column(
+                    children: [
+                      if (widget.image == "")
+                        Container(
+                          height: 250,
+                        ),
+                      if (widget.image != "")
+                        ClipRRect(
+                            borderRadius: BorderRadius.circular(25),
+                            child: Image.network(
+                              widget.image,
+                              width: 250,
+                              height: 250,
+                              fit: BoxFit.fill,
+                            )),
+                    ],
+                  )),
+            const SizedBox(
               height: 20,
             ),
             if (data.isNotEmpty)
@@ -102,7 +111,10 @@ class _BlogState extends State<Blog> {
                   parse(parse(data['title']!).documentElement!.text)
                       .documentElement!
                       .text,
-                  style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black),
                 ),
               ),
             Padding(
@@ -113,7 +125,7 @@ class _BlogState extends State<Blog> {
                   Container(
                     child: Text(
                       widget.category,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 12.0,
                           fontWeight: FontWeight.w600,
                           color: Colors.red),
@@ -128,13 +140,13 @@ class _BlogState extends State<Blog> {
                               color: const Color.fromARGB(38, 104, 58, 183)),
                           child: IconButton(
                               onPressed: sharehandler,
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.share,
                                 color: Color.fromARGB(255, 50, 0, 168),
                                 size: 23,
                               )),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
                         CustomImageView(
@@ -149,48 +161,29 @@ class _BlogState extends State<Blog> {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(left: 15),
+              margin: const EdgeInsets.only(left: 15),
               child: Column(
                 children: [
                   if (data.isNotEmpty)
-                    Text(
-                      parse(parse(data['innertitle']!).documentElement!.text)
-                          .documentElement!
-                          .text,
-                      style: TextStyle(
-                          fontSize: 14.0, fontWeight: FontWeight.w500),
-                    ),
-                  if (data.isNotEmpty)
-                    Text(
-                      parse(parse(data['innerdescription']!)
-                              .documentElement!
-                              .text)
-                          .documentElement!
-                          .text,
-                      style: TextStyle(
-                          fontSize: 14.0, fontWeight: FontWeight.w500),
-                    ),
+                    Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: HtmlWidget(data['innertitle']!)),
                   if (data.isNotEmpty)
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        parse(parse(data['middletitle']!).documentElement!.text)
-                            .documentElement!
-                            .text,
-                        style: TextStyle(
-                            fontSize: 14.0, fontWeight: FontWeight.w500),
-                      ),
-                    ),
+                        padding: const EdgeInsets.all(8.0),
+                        child: HtmlWidget(data['description']!)),
                   if (data.isNotEmpty)
-                    Text(
-                      parse(parse(data['middledescription']!)
-                              .documentElement!
-                              .text)
-                          .documentElement!
-                          .text,
-                      style: TextStyle(
-                          fontSize: 14.0, fontWeight: FontWeight.w500),
-                    ),
+                    Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: HtmlWidget(data['innerdescription']!)),
+                  if (data.isNotEmpty)
+                    Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: HtmlWidget(data['middletitle']!)),
+                  if (data.isNotEmpty)
+                    Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: HtmlWidget(data['middledescription']!)),
                 ],
               ),
             )
